@@ -5,11 +5,24 @@
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = this;
         }
 
-        public Command GoToProfileCommand => new Command(async () => await Shell.Current.GoToAsync("//ProfilePage"));
-        public Command GoToSettingsCommand => new Command(async () => await Shell.Current.GoToAsync("//SettingsPage"));
-        public Command GoToSessionsCommand => new Command(async () => await Shell.Current.GoToAsync("//SessionsPage"));
+        // Navigates to ProfilePage on button click
+        private async void OnProfileClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//ProfilePage");
+        }
+
+        // Navigates to SettingsPage on button click
+        private async void OnSettingsClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//SettingsPage");
+        }
+
+        // Navigates to SessionsPage on button click
+        private async void OnSessionsClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//SessionsPage");
+        }
     }
 }

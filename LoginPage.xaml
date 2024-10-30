@@ -2,16 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppNSRI.LoginPage"
-             Title="Login">
-    <StackLayout Padding="20" VerticalOptions="Center" HorizontalOptions="Center">
-        <Frame CornerRadius="10" BackgroundColor="LightGray" Padding="20" HasShadow="True">
-            <StackLayout>
-                <Label Text="Login" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold"/>
-                <Entry Placeholder="Username" x:Name="UsernameEntry" Margin="0,10"/>
-                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Margin="0,10"/>
-                <Button Text="Login" Clicked="OnLoginClicked" BackgroundColor="DarkBlue" TextColor="White"/>
-                <Label Text="Don't have an account? Please contact support@nsri.org" FontSize="12" TextColor="Gray" HorizontalOptions="Center" Margin="0,20,0,0"/>
+             Title="Login"
+             BackgroundColor="{StaticResource SecondaryColor}">
+
+    <!-- StackLayout to vertically center content and provide consistent padding -->
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="30,60">
+
+        <!-- NSRI Logo for branding -->
+        <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,0,0,20" />
+
+        <!-- Page Title with NSRI's primary color for consistent branding -->
+        <Label Text="Sign in to NSRI" FontSize="28" FontAttributes="Bold" 
+               TextColor="{StaticResource PrimaryColor}" 
+               HorizontalOptions="Center" Margin="0,0,0,30" />
+
+        <!-- Username Entry Field with an icon inside a Frame for high contrast and user-friendly layout -->
+        <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
+               CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="user_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                <Entry Placeholder="Username" x:Name="UsernameEntry" Margin="10,0,0,0" 
+                       BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
+                       PlaceholderColor="#666666" FontSize="16" />
             </StackLayout>
         </Frame>
+
+        <!-- Password Entry Field with an icon inside a Frame for secure input visibility and alignment -->
+        <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
+               CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="password_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                <Entry Placeholder="Password" x:Name="PasswordEntry" IsPassword="True" Margin="10,0,0,0" 
+                       BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
+                       PlaceholderColor="#666666" FontSize="16" />
+            </StackLayout>
+        </Frame>
+
+        <!-- Login Button styled to match NSRI branding and call OnLoginClicked on tap -->
+        <Button Text="Login" Style="{StaticResource PrimaryButtonStyle}" 
+                CornerRadius="20" Margin="0,20,0,10"
+                HeightRequest="50" Clicked="OnLoginClicked" />
+
+        <!-- Registration link for users without an account, includes tap gesture for navigation -->
+        <Label Text="Don't have an account? Register here." FontSize="14" TextColor="{StaticResource PrimaryColor}" 
+               HorizontalOptions="Center" Margin="0,20,0,0">
+            <Label.GestureRecognizers>
+                <!-- TapGestureRecognizer to handle tap events for navigating to RegistrationPage -->
+                <TapGestureRecognizer Tapped="OnRegisterLinkTapped" />
+            </Label.GestureRecognizers>
+        </Label>
+
     </StackLayout>
 </ContentPage>

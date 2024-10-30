@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging.Abstractions;
 using System.Data.SqlTypes;
 
 namespace MauiAppNSRI;
@@ -11,9 +12,14 @@ public partial class RegistrationPage : ContentPage
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
-        bool isRegistered = await RegisterUserAsync(NameEntry.Text, SurnameEntry.Text, UsernameEntry.Text, PasswordEntry.Text, DobEntry.Text, IdEntry.Text);
-
-       
+        bool isRegistered = await RegisterUserAsync(
+            NameEntry.Text,
+            SurnameEntry.Text,
+            UsernameEntry.Text,
+            PasswordEntry.Text,
+            DobEntry.Text,
+            IdEntry.Text
+        );
 
         if (isRegistered)
         {
