@@ -8,6 +8,21 @@ public partial class SessionsPage : ContentPage
     }
 
     /// <summary>
+    /// Back button navigation to MainPage.
+    /// </summary>
+    private async void OnBackButtonClicked(object sender, EventArgs e)
+    {
+        if (Navigation.NavigationStack.Count > 1)
+        {
+            await Navigation.PopAsync();
+        }
+        else
+        {
+            await Shell.Current.GoToAsync("//MainPage");
+        }
+    }
+
+    /// <summary>
     /// Event handler for the "Save Session" button click.
     /// Captures all input data and processes it (e.g., saving locally or preparing for API submission).
     /// </summary>

@@ -1,28 +1,36 @@
-﻿namespace MauiAppNSRI
+﻿using Microsoft.Maui.Controls;
+
+namespace MauiAppNSRI;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        BindingContext = this; // Set the BindingContext to allow command bindings
+    }
 
-        // Navigates to ProfilePage on button click
-        private async void OnProfileClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//ProfilePage");
-        }
+    // Commands for navigation buttons
+    public Command NavigateToLogSession => new Command(async () => await GoToPage("LogSessionPage"));
+    public Command NavigateToSessions => new Command(async () => await GoToPage("SessionsPage"));
+    public Command NavigateToReports => new Command(async () => await GoToPage("ReportsPage"));
+    public Command NavigateToProfile => new Command(async () => await GoToPage("ProfilePage"));
+    public Command NavigateToSettings => new Command(async () => await GoToPage("SettingsPage"));
+    public Command NavigateToHome => new Command(async () => await GoToPage("MainPage"));
 
-        // Navigates to SettingsPage on button click
-        private async void OnSettingsClicked(object sender, EventArgs e)
+    /// <summary>
+    /// Helper method to navigate to a page by route.
+    /// </summary>
+    /// <param name="pageName">Name of the page to navigate to.</param>
+    private async Task GoToPage(string pageName)
+    {
+        try
         {
-            await Shell.Current.GoToAsync("//SettingsPage");
+            await Shell.Current.GoToAsync($"//{pageName}");
         }
-
-        // Navigates to SessionsPage on button click
-        private async void OnSessionsClicked(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            await Shell.Current.GoToAsync("//SessionsPage");
+            await DisplayAlert("Navigation Error", $"Could not navigate to {pageName}: {ex.Message}", "OK");
         }
     }
 }

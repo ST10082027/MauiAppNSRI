@@ -1,40 +1,74 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppNSRI.MainPage"
-             Title="Main"
-             BackgroundColor="{StaticResource SecondaryColor}">
+             Title="Home"
+             BackgroundColor="#F5F5F5">
+    <!-- Light neutral background for contrast -->
 
-    <!-- StackLayout for centered content and consistent alignment -->
-    <StackLayout Padding="30,60" VerticalOptions="Center" HorizontalOptions="Center">
+    <ScrollView>
+        <StackLayout Padding="30,20" Spacing="20">
 
-        <!-- NSRI Logo at the top for branding consistency -->
-        <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,0,0,20" />
+            <!-- Navigation Bar -->
+            <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}" Padding="10,15" Spacing="20" HorizontalOptions="FillAndExpand">
+                <Button Text="Home" Command="{Binding NavigateToHome}" TextColor="White" BackgroundColor="Transparent" FontAttributes="Bold" />
+                <Button Text="Sessions" Command="{Binding NavigateToSessions}" TextColor="White" BackgroundColor="Transparent" FontAttributes="Bold" />
+                <Button Text="Profile" Command="{Binding NavigateToProfile}" TextColor="White" BackgroundColor="Transparent" FontAttributes="Bold" />
+                <Button Text="Settings" Command="{Binding NavigateToSettings}" TextColor="White" BackgroundColor="Transparent" FontAttributes="Bold" />
+            </StackLayout>
 
-        <!-- MainPage Title with NSRI primary color -->
-        <Label Text="Welcome to NSRI" FontSize="28" FontAttributes="Bold" 
-               TextColor="{StaticResource PrimaryColor}" 
-               HorizontalOptions="Center" Margin="0,0,0,30" />
+            <!-- NSRI Logo and Page Title -->
+            <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,0,0,20" HorizontalOptions="Center"/>
+            <Label Text="Dashboard" FontSize="28" FontAttributes="Bold" 
+                   TextColor="{StaticResource PrimaryColor}" 
+                   HorizontalOptions="Center" Margin="0,0,0,30" />
 
-        <!-- Profile Button with similar style to LoginPage, inside a Frame for contrast -->
-        <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-               CornerRadius="20" Padding="10" HasShadow="True" Margin="0,10">
-            <Button Text="Profile" Style="{StaticResource PrimaryButtonStyle}" 
-                    CornerRadius="10" HeightRequest="50" Clicked="OnProfileClicked" />
-        </Frame>
+            <!-- Quick Actions Section -->
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
+                   CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout>
+                    <Label Text="Quick Actions" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" HorizontalOptions="Center"/>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                        <Button Text="Log Session" Style="{StaticResource PrimaryButtonStyle}" 
+                                Command="{Binding NavigateToLogSession}" WidthRequest="120"/>
+                        <Button Text="View Sessions" Style="{StaticResource PrimaryButtonStyle}" 
+                                Command="{Binding NavigateToSessions}" WidthRequest="120"/>
+                        <Button Text="Reports" Style="{StaticResource PrimaryButtonStyle}" 
+                                Command="{Binding NavigateToReports}" WidthRequest="120"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
 
-        <!-- Settings Button styled consistently with NSRI primary color and Frame for contrast -->
-        <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-               CornerRadius="20" Padding="10" HasShadow="True" Margin="0,10">
-            <Button Text="Settings" Style="{StaticResource PrimaryButtonStyle}" 
-                    CornerRadius="10" HeightRequest="50" Clicked="OnSettingsClicked" />
-        </Frame>
+            <!-- Session Summary Section -->
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout>
+                    <Label Text="Upcoming Session" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Text="Date:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                        <Label Text="02/11/2023" TextColor="#666666" Margin="10,0,0,0" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Text="Location:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                        <Label Text="Community Pool" TextColor="#666666" Margin="10,0,0,0" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                        <Label Text="Participants:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                        <Label Text="5" TextColor="#666666" Margin="10,0,0,0" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
 
-        <!-- Sessions Button for consistent navigation options with NSRI branding -->
-        <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-               CornerRadius="20" Padding="10" HasShadow="True" Margin="0,10">
-            <Button Text="Sessions" Style="{StaticResource PrimaryButtonStyle}" 
-                    CornerRadius="10" HeightRequest="50" Clicked="OnSessionsClicked" />
-        </Frame>
+            <!-- Notifications Section -->
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout>
+                    <Label Text="Notifications" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    <Label Text="Log all safety protocols for each session." FontSize="14" TextColor="#666666" Margin="0,10,0,0" />
+                    <Label Text="New feature: View session stats in Reports!" FontSize="14" TextColor="#666666" Margin="0,5,0,0" />
+                    <Label Text="Safety Tip: Encourage floating practice in safe areas." FontSize="14" TextColor="{StaticResource PrimaryColor}" Margin="0,5,0,0" />
+                </StackLayout>
+            </Frame>
 
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>
