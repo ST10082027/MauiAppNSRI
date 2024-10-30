@@ -55,8 +55,7 @@ public partial class SessionsPage : ContentPage
             }
 
             // Placeholder for actual save logic (local database, API call, etc.)
-            bool isSaved = await SaveSessionAsync(date, time, location, numParticipants, sessionGoals, observations,
-                                                   coveredFloating, coveredBreathing, coveredArmMovement, coveredLegMovement, assessment);
+            bool isSaved = await SaveSessionAsync(date, time, location, numParticipants, sessionGoals, observations, coveredFloating, coveredBreathing, coveredArmMovement, coveredLegMovement, assessment);
 
             if (isSaved)
             {
@@ -80,9 +79,7 @@ public partial class SessionsPage : ContentPage
     /// Asynchronously saves session data.
     /// This placeholder method can be replaced with actual logic to save to a local database or API.
     /// </summary>
-    private Task<bool> SaveSessionAsync(string date, string time, string location, string numParticipants, string sessionGoals,
-                                        string observations, bool coveredFloating, bool coveredBreathing, bool coveredArmMovement,
-                                        bool coveredLegMovement, string assessment)
+    private Task<bool> SaveSessionAsync(string date, string time, string location, string numParticipants, string sessionGoals, string observations, bool coveredFloating, bool coveredBreathing, bool coveredArmMovement, bool coveredLegMovement, string assessment)
     {
         // Placeholder: Here you would add code to save data, such as database integration or API calls
         // For now, we simulate successful save by returning true
