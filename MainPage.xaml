@@ -1,0 +1,11 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppNSRI.MainPage"
+             Title="Home">
+    <StackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+        <Label Text="Welcome to NSRI" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <Button Text="Profile" Command="{Binding GoToProfileCommand}" BackgroundColor="DarkBlue" TextColor="White"/>
+        <Button Text="Settings" Command="{Binding GoToSettingsCommand}" BackgroundColor="DarkBlue" TextColor="White"/>
+        <Button Text="Sessions" Command="{Binding GoToSessionsCommand}" BackgroundColor="DarkBlue" TextColor="White"/>
+    </StackLayout>
+</ContentPage>
