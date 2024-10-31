@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- ProfilePage.xaml: Defines the layout for the user profile page, 
+showing personal and account information with support and logout options.-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppNSRI.ProfilePage"
@@ -6,89 +8,68 @@
              BackgroundColor="{StaticResource SecondaryColor}">
 
     <ScrollView>
-        <StackLayout Padding="20" VerticalOptions="Start" HorizontalOptions="Center">
+        <StackLayout Padding="20" Spacing="20" VerticalOptions="Start" HorizontalOptions="Center">
 
-            <!-- Navigation Bar with Back Button -->
+            <!-- Navigation Bar with Back Button and Title -->
             <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}" Padding="10,0" HorizontalOptions="FillAndExpand">
                 <Button Text="Back" Clicked="OnBackButtonClicked" TextColor="White" BackgroundColor="Transparent" FontAttributes="Bold" />
                 <Label Text="My Profile" FontSize="24" FontAttributes="Bold" TextColor="White" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
             </StackLayout>
-            
-            <!-- NSRI Logo and Page Title -->
-            <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,10,0,20" HorizontalOptions="Center"/>
 
             <!-- Profile Picture Section -->
-            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-                   CornerRadius="100" Padding="5" HasShadow="True" HorizontalOptions="Center" WidthRequest="120" HeightRequest="120">
+            <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,10,0,20" HorizontalOptions="Center"/>
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" CornerRadius="100" Padding="5" HasShadow="True" HorizontalOptions="Center" WidthRequest="120" HeightRequest="120">
                 <Image Source="profile_placeholder.png" HeightRequest="100" WidthRequest="100" />
             </Frame>
-            <Button Text="Change Profile Picture" TextColor="{StaticResource PrimaryColor}" 
-                    BackgroundColor="Transparent" FontAttributes="Bold" Margin="0,10,0,20"
-                    Clicked="OnChangeProfilePictureClicked"/>
+            <Button Text="Change Profile Picture" TextColor="{StaticResource PrimaryColor}" BackgroundColor="Transparent" FontAttributes="Bold" Margin="0,10,0,20" Clicked="OnChangeProfilePictureClicked"/>
 
             <!-- Personal Information Section -->
-            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-                   CornerRadius="10" Padding="15" HasShadow="True" Margin="0,10">
-                <StackLayout>
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout Spacing="5">
                     <Label Text="Personal Information" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label Text="Name:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label x:Name="NameLabel" FontSize="16" TextColor="#666666" />
-                    <Label Text="Email:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="EmailLabel" FontSize="16" TextColor="#666666" />
-                    <Label Text="Phone:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="PhoneLabel" FontSize="16" TextColor="#666666" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Name:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="NameLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Surname:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="SurnameLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Date of Birth:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="DateOfBirthLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="ID Number:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="IDNumberLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Email:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="EmailLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Phone:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="CellphoneLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
                 </StackLayout>
             </Frame>
 
             <!-- Account Details Section -->
-            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-                   CornerRadius="10" Padding="15" HasShadow="True" Margin="0,10">
-                <StackLayout>
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout Spacing="5">
                     <Label Text="Account Details" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label Text="Username:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label x:Name="UsernameLabel" FontSize="16" TextColor="#666666" />
-                    <Button Text="Change Password" TextColor="{StaticResource PrimaryColor}" 
-                            BackgroundColor="Transparent" FontAttributes="Bold" Margin="0,10,0,0"
-                            Clicked="OnChangePasswordClicked"/>
-                    <Label Text="NSRI ID:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="NsriIdLabel" FontSize="16" TextColor="#666666" />
-                </StackLayout>
-            </Frame>
-
-            <!-- Professional Details Section -->
-            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-                   CornerRadius="10" Padding="15" HasShadow="True" Margin="0,10">
-                <StackLayout>
-                    <Label Text="Professional Details" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label Text="Certifications:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label x:Name="CertificationsLabel" FontSize="16" TextColor="#666666" />
-                    <Label Text="Years of Experience:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="ExperienceLabel" FontSize="16" TextColor="#666666" />
-                    <Label Text="Expertise:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="ExpertiseLabel" FontSize="16" TextColor="#666666" />
-                </StackLayout>
-            </Frame>
-
-            <!-- Activity Summary Section -->
-            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
-                   CornerRadius="10" Padding="15" HasShadow="True" Margin="0,10">
-                <StackLayout>
-                    <Label Text="Activity Summary" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label Text="Total Sessions Conducted:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label x:Name="TotalSessionsLabel" FontSize="16" TextColor="#666666" />
-                    <Label Text="Recent Sessions:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-                    <Label x:Name="RecentSessionsLabel" FontSize="16" TextColor="#666666" />
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Username:" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" WidthRequest="120"/>
+                        <Label x:Name="UsernameLabel" FontSize="16" TextColor="#666666" />
+                    </StackLayout>
+                    <Button Text="Change Password" TextColor="{StaticResource PrimaryColor}" BackgroundColor="Transparent" FontAttributes="Bold" Margin="0,10,0,0" Clicked="OnChangePasswordClicked"/>
                 </StackLayout>
             </Frame>
 
             <!-- Support and Logout Section -->
             <StackLayout Orientation="Vertical" Margin="0,20,0,10" HorizontalOptions="Center">
-                <Button Text="Contact Support" Style="{StaticResource PrimaryButtonStyle}" 
-                        CornerRadius="20" HeightRequest="50" WidthRequest="200" Margin="0,10" 
-                        Clicked="OnContactSupportClicked"/>
-                <Button Text="Logout" Style="{StaticResource PrimaryButtonStyle}" 
-                        BackgroundColor="{StaticResource AccentColor}" TextColor="White" 
-                        CornerRadius="20" HeightRequest="50" WidthRequest="200" Clicked="OnLogoutClicked"/>
+                <Button Text="Contact Support" Style="{StaticResource PrimaryButtonStyle}" CornerRadius="20" HeightRequest="50" WidthRequest="200" Margin="0,10" Clicked="OnContactSupportClicked"/>
+                <Button Text="Logout" Style="{StaticResource PrimaryButtonStyle}" BackgroundColor="{StaticResource AccentColor}" TextColor="White" CornerRadius="20" HeightRequest="50" WidthRequest="200" Clicked="OnLogoutClicked"/>
             </StackLayout>
 
         </StackLayout>

@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--AppShell.xaml: Defines the application structure and navigation routes using Shell.
+Shell provides a simplified navigation experience and allows for defining routes 
+to each page for easy access across the application.-->
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:MauiAppNSRI"
        x:Class="MauiAppNSRI.AppShell">
 
-    <!-- Define Shell routes for each primary page in the app -->
-    <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
-    <ShellContent Route="RegistrationPage" ContentTemplate="{DataTemplate local:RegistrationPage}" />
-    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+    <!-- ShellContent: Each ShellContent defines a route and associates it with a specific page.
+    The 'Route' attribute sets a unique identifier for each page, allowing programmatic navigation.
+    The 'ContentTemplate' attribute specifies the UI template for each page using DataTemplate. -->
     
+    <!-- Route for Login Page -->
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+
+    <!-- Route for Registration Page -->
+    <ShellContent Route="RegistrationPage" ContentTemplate="{DataTemplate local:RegistrationPage}" />
+
+    <!-- Route for Main Page -->
+    <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+
+    <!-- Route for Profile Page -->
+    <ShellContent Route="ProfilePage" ContentTemplate="{DataTemplate local:ProfilePage}" />
+
+    <!-- Route for Settings Page -->
     <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+
+    <!-- Route for Sessions Page -->
     <ShellContent Route="SessionsPage" ContentTemplate="{DataTemplate local:SessionsPage}" />
 </Shell>

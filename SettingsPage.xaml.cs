@@ -2,6 +2,9 @@ using Microsoft.Maui.Storage;
 
 namespace MauiAppNSRI;
 
+/// <summary>
+/// Settings page for user preferences and app configurations.
+/// </summary>
 public partial class SettingsPage : ContentPage
 {
     public SettingsPage()
@@ -11,7 +14,7 @@ public partial class SettingsPage : ContentPage
     }
 
     /// <summary>
-    /// Back button navigation to MainPage.
+    /// Navigates back to the MainPage or pops from navigation stack if available.
     /// </summary>
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
@@ -26,25 +29,23 @@ public partial class SettingsPage : ContentPage
     }
 
     /// <summary>
-    /// Loads initial settings, such as theme, font size, and notification preferences.
+    /// Loads user preferences for theme, font size, notifications, and other settings.
     /// </summary>
     private void LoadSettings()
     {
-        // Load saved preferences with defaults if no value is set
         SessionRemindersSwitch.IsToggled = Preferences.Get("SessionRemindersEnabled", true);
         FeatureAlertsSwitch.IsToggled = Preferences.Get("FeatureAlertsEnabled", true);
         SafetyTipsSwitch.IsToggled = Preferences.Get("SafetyTipsEnabled", false);
-        ThemePicker.SelectedIndex = Preferences.Get("SelectedTheme", 0); // 0 for Light, 1 for Dark
-        FontSizePicker.SelectedIndex = Preferences.Get("SelectedFontSize", 1); // Default to Medium
+        ThemePicker.SelectedIndex = Preferences.Get("SelectedTheme", 0); // Default: Light theme
+        FontSizePicker.SelectedIndex = Preferences.Get("SelectedFontSize", 1); // Default: Medium font
         OfflineModeSwitch.IsToggled = Preferences.Get("OfflineModeEnabled", false);
     }
 
     /// <summary>
-    /// Event handler for toggling notifications.
+    /// Toggles notification preferences and saves changes.
     /// </summary>
     private void OnNotificationToggled(object sender, ToggledEventArgs e)
     {
-        // Save notification preferences
         if (sender == SessionRemindersSwitch)
             Preferences.Set("SessionRemindersEnabled", e.Value);
         else if (sender == FeatureAlertsSwitch)
@@ -54,40 +55,34 @@ public partial class SettingsPage : ContentPage
     }
 
     /// <summary>
-    /// Event handler for theme selection.
+    /// Changes and saves the app theme based on user selection.
     /// </summary>
     private void OnThemeChanged(object sender, EventArgs e)
     {
-        string selectedTheme = (string)ThemePicker.SelectedItem;
-        bool isDarkTheme = selectedTheme == "Dark";
-
-        // Set app theme and save preference
+        bool isDarkTheme = ThemePicker.SelectedItem?.ToString() == "Dark";
         Application.Current.UserAppTheme = isDarkTheme ? AppTheme.Dark : AppTheme.Light;
-        Preferences.Set("SelectedTheme", isDarkTheme ? 1 : 0); // Save as 0 for Light, 1 for Dark
+        Preferences.Set("SelectedTheme", isDarkTheme ? 1 : 0);
     }
 
     /// <summary>
-    /// Event handler for font size selection.
+    /// Changes and saves the font size preference based on user selection.
     /// </summary>
     private void OnFontSizeChanged(object sender, EventArgs e)
     {
-        string selectedFontSize = (string)FontSizePicker.SelectedItem;
-
-        // Save selected font size for use in other parts of the app if necessary
-        Preferences.Set("SelectedFontSize", FontSizePicker.SelectedIndex); // Save as index for consistency
+        Preferences.Set("SelectedFontSize", FontSizePicker.SelectedIndex);
     }
 
     /// <summary>
-    /// Event handler for clearing cache.
+    /// Clears the app cache and provides feedback to the user.
     /// </summary>
     private async void OnClearCacheClicked(object sender, EventArgs e)
     {
         await DisplayAlert("Clear Cache", "Cache cleared successfully.", "OK");
-        // Placeholder: Implement actual cache-clearing logic here
+        // TODO: Implement actual cache-clearing logic
     }
 
     /// <summary>
-    /// Event handler for toggling offline mode.
+    /// Toggles offline mode and saves preference.
     /// </summary>
     private void OnOfflineModeToggled(object sender, ToggledEventArgs e)
     {
@@ -95,20 +90,43 @@ public partial class SettingsPage : ContentPage
     }
 
     /// <summary>
-    /// Event handler for changing user password
+    /// Placeholder for the change password feature.
     /// </summary>
     private async void OnChangePasswordClicked(object sender, EventArgs e)
     {
         await DisplayAlert("Change Password", "Password change feature coming soon.", "OK");
     }
 
-    /// <summary>
-    /// Event handlers for support, feedback, and legal buttons.
-    /// </summary>
-    private async void OnHelpCenterClicked(object sender, EventArgs e) => await DisplayAlert("Help Center", "Help content coming soon.", "OK");
-    private async void OnContactSupportClicked(object sender, EventArgs e) => await DisplayAlert("Contact Support", "Contact support at support@nsri.org.za", "OK");
-    private async void OnSendFeedbackClicked(object sender, EventArgs e) => await DisplayAlert("Send Feedback", "Feedback submission coming soon.", "OK");
-    private async void OnTermsClicked(object sender, EventArgs e) => await DisplayAlert("Terms and Conditions", "Terms content coming soon.", "OK");
-    private async void OnPrivacyPolicyClicked(object sender, EventArgs e) => await DisplayAlert("Privacy Policy", "Privacy policy content coming soon.", "OK");
-}
+    #region Support and Legal Actions
 
+    /// <summary>
+    /// Event handler for opening the help center.
+    /// </summary>
+    private async void OnHelpCenterClicked(object sender, EventArgs e) =>
+        await DisplayAlert("Help Center", "Help content coming soon.", "OK");
+
+    /// <summary>
+    /// Opens contact support information.
+    /// </summary>
+    private async void OnContactSupportClicked(object sender, EventArgs e) =>
+        await DisplayAlert("Contact Support", "Contact support at support@nsri.org.za", "OK");
+
+    /// <summary>
+    /// Placeholder for feedback submission.
+    /// </summary>
+    private async void OnSendFeedbackClicked(object sender, EventArgs e) =>
+        await DisplayAlert("Send Feedback", "Feedback submission coming soon.", "OK");
+
+    /// <summary>
+    /// Displays terms and conditions content.
+    /// </summary>
+    private async void OnTermsClicked(object sender, EventArgs e) =>
+        await DisplayAlert("Terms and Conditions", "Terms content coming soon.", "OK");
+
+    /// <summary>
+    /// Displays privacy policy content.
+    /// </summary>
+    private async void OnPrivacyPolicyClicked(object sender, EventArgs e) =>
+        await DisplayAlert("Privacy Policy", "Privacy policy content coming soon.", "OK");
+    #endregion
+}

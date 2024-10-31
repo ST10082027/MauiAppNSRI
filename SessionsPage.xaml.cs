@@ -81,7 +81,7 @@ public partial class SessionsPage : ContentPage
     /// </summary>
     private Task<bool> SaveSessionAsync(string date, string time, string location, string numParticipants, string sessionGoals, string observations, bool coveredFloating, bool coveredBreathing, bool coveredArmMovement, bool coveredLegMovement, string assessment)
     {
-        // Placeholder: Here you would add code to save data, such as database integration or API calls
+        // Placeholder: Here we would add code to save data, such as database integration or API calls
         // For now, we simulate successful save by returning true
         return Task.FromResult(true);
     }

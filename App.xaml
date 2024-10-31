@@ -1,13 +1,22 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Root element for the .NET MAUI application. Defines global application resources and styles.-->
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MauiAppNSRI"
              x:Class="MauiAppNSRI.App">
+
+    <!-- Application-wide Resources -->
     <Application.Resources>
         <ResourceDictionary>
+            <!-- MergedDictionaries allow for combining multiple resource dictionaries, making it easy to manage separate style files and centralize theme-related resources.-->
             <ResourceDictionary.MergedDictionaries>
+
+                <!-- Include color definitions from Colors.xaml file Colors.xaml should define reusable color resources. -->
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+
+                <!-- Include general styling from Styles.xaml file. Styles.xaml should define control styles (e.g., Button, Label) used throughout the app. -->
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

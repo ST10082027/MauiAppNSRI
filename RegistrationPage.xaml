@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- RegistrationPage.xaml: Defines the registration UI, including user input fields and upload options.
+Uses consistent NSRI branding with centralized styling for a cohesive appearance.-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppNSRI.RegistrationPage"
@@ -8,15 +10,25 @@
     <ScrollView>
         <StackLayout Padding="30,40" VerticalOptions="Center" HorizontalOptions="Center">
 
-            <!-- NSRI Logo for consistent branding -->
+            <!-- NSRI Logo -->
             <Image Source="nsri_logo.png" HeightRequest="80" WidthRequest="80" Margin="0,0,0,20" />
 
             <!-- Page Title -->
             <Label Text="Create Account" FontSize="28" FontAttributes="Bold" 
-                   TextColor="{StaticResource PrimaryColor}" 
-                   HorizontalOptions="Center" Margin="0,0,0,30" />
+                   TextColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Margin="0,0,0,30" />
 
-            <!-- Name Entry Field -->
+            <!-- Link to navigate to LoginPage -->
+            <Label Text="Already have an account? Login here." 
+       FontSize="14" 
+       TextColor="{StaticResource PrimaryColor}" 
+       HorizontalOptions="Center" 
+       Margin="0,20,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnLoginLinkTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Name Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
@@ -27,7 +39,7 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Surname Entry Field -->
+            <!-- Surname Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
@@ -38,7 +50,29 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Username Entry Field -->
+            <!-- Email Field -->
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
+                   CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="email_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                    <Entry Placeholder="Email" x:Name="EmailEntry" Margin="10,0,0,0" 
+                           BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
+                           PlaceholderColor="#666666" FontSize="16" Keyboard="Email" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Cellphone Number Field -->
+            <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
+                   CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="phone_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
+                    <Entry Placeholder="Cellphone Number" x:Name="CellphoneEntry" Margin="10,0,0,0" 
+                           BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
+                           PlaceholderColor="#666666" FontSize="16" Keyboard="Telephone" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Username Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
@@ -49,7 +83,7 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Password Entry Field -->
+            <!-- Password Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
@@ -60,42 +94,42 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Date of Birth Entry Field -->
+            <!-- Date of Birth Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
                     <Image Source="calendar_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
-                    <Entry Placeholder="Date of Birth" x:Name="DobEntry" Margin="10,0,0,0" 
-                           BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
-                           PlaceholderColor="#666666" FontSize="16" />
+                    <DatePicker x:Name="DateOfBirthEntry" TextColor="{StaticResource PrimaryColor}" 
+                                Margin="10,0,0,0" FontSize="16" />
                 </StackLayout>
             </Frame>
 
-            <!-- ID Number Entry Field -->
+            <!-- ID Number Field -->
             <Frame BackgroundColor="#FFFFFF" BorderColor="{StaticResource PrimaryColor}" 
                    CornerRadius="10" Padding="10" HasShadow="True" Margin="0,10">
                 <StackLayout Orientation="Horizontal">
                     <Image Source="id_icon.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" />
-                    <Entry Placeholder="ID Number" x:Name="IdEntry" Margin="10,0,0,0" 
+                    <Entry Placeholder="ID Number" x:Name="IDNumberEntry" Margin="10,0,0,0" 
                            BackgroundColor="#FFFFFF" TextColor="{StaticResource PrimaryColor}" 
-                           PlaceholderColor="#666666" FontSize="16" />
+                           PlaceholderColor="#666666" FontSize="16" Keyboard="Numeric" />
                 </StackLayout>
             </Frame>
 
-            <!-- Upload National ID (Front) -->
-            <Label Text="Upload National ID (Front)" FontSize="14" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-            <Button Text="Choose File" BackgroundColor="#E63946" TextColor="{StaticResource SecondaryColor}" Margin="0,0,0,10" 
-                    Command="{Binding ChooseFileCommand}" CornerRadius="10"/>
-
-            <!-- Upload National ID (Back) -->
-            <Label Text="Upload National ID (Back)" FontSize="14" TextColor="{StaticResource PrimaryColor}" Margin="0,10,0,0"/>
-            <Button Text="Choose File" BackgroundColor="#E63946" TextColor="{StaticResource SecondaryColor}" Margin="0,0,0,10" 
-                    Command="{Binding ChooseFileCommand}" CornerRadius="10"/>
+            <!-- ID Photo Upload Buttons -->
+            <Button Text="Upload Front of ID" Clicked="OnFrontIdUploadClicked"
+                    BackgroundColor="{StaticResource PrimaryColor}" TextColor="#FFFFFF" 
+                    CornerRadius="10" Margin="0,10" />
+            <Button Text="Upload Back of ID" Clicked="OnBackIdUploadClicked"
+                    BackgroundColor="{StaticResource PrimaryColor}" TextColor="#FFFFFF" 
+                    CornerRadius="10" Margin="0,10" />
 
             <!-- Register Button -->
-            <Button Text="Register" Style="{StaticResource PrimaryButtonStyle}" 
-                    CornerRadius="20" Margin="0,20,0,10" HeightRequest="50" Clicked="OnRegisterClicked" />
+            <Button Text="Register" Clicked="OnRegisterButtonClicked" 
+                    BackgroundColor="{StaticResource PrimaryColor}" 
+                    TextColor="#FFFFFF" CornerRadius="10" Margin="0,20" />
 
         </StackLayout>
     </ScrollView>
 </ContentPage>
+
+
