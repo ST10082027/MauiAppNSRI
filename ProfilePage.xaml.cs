@@ -27,7 +27,6 @@ namespace MauiAppNSRI
         private void LoadUserData()
         {
             string loggedInUsername = Preferences.Get("LoggedInUsername", string.Empty);
-            DisplayAlert("Debug", $"Retrieved Username: {loggedInUsername}", "OK");
 
             if (string.IsNullOrEmpty(loggedInUsername))
             {
@@ -36,20 +35,23 @@ namespace MauiAppNSRI
             }
 
             using var db = new SQLiteConnection(dbPath);
-            db.CreateTable<UserModel>();
+            db.CreateTable<UserModel>();// Ensure the UserModel table exists
+
+            // Retrieve the logged-in user's details based on the stored username
             var user = db.Table<UserModel>().FirstOrDefault(u => u.Username == loggedInUsername);
 
             if (user != null)
             {
-                DisplayAlert("Data Check", $"User found: {user.Name} {user.Surname}", "OK");
-
-                NameLabel.Text = user.Name;
-                SurnameLabel.Text = user.Surname;
-                DateOfBirthLabel.Text = user.DateOfBirth.ToString("d");
-                IDNumberLabel.Text = user.IDNumber;
+                // Populate the labels on the profile page with user information
+                UsernameLabel.Text = user.Username;
                 EmailLabel.Text = user.Email;
                 CellphoneLabel.Text = user.CellphoneNumber;
-                UsernameLabel.Text = user.Username;
+
+                // Optional additional fields if available in the UserModel
+                NameLabel.Text = user.Name;
+                SurnameLabel.Text = user.Surname;
+                DateOfBirthLabel.Text = user.DateOfBirth.ToString("d");  // Format date if it's nullable
+                IDNumberLabel.Text = user.IDNumber;
             }
             else
             {
@@ -62,9 +64,17 @@ namespace MauiAppNSRI
         /// </summary>
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
+            // Clear all stored preferences related to the user session
             Preferences.Remove("LoggedInUsername");
+            Preferences.Remove("UserRole");
+
+            // Reset any in-app data that may have been user-specific (optional)
+            ClearUserData();
+
+            // Navigate to the login page and clear the navigation stack to prevent "Back" navigation
             await Shell.Current.GoToAsync("//LoginPage");
         }
+
 
         /// <summary>
         /// Navigates back to the MainPage.
@@ -97,5 +107,23 @@ namespace MauiAppNSRI
         {
             // Logic to contact support
         }
+
+        /// <summary>
+        /// Clear profile page labels
+        /// </summary>
+        public void ClearUserData()
+        {
+            UsernameLabel.Text = string.Empty;
+            EmailLabel.Text = string.Empty;
+            CellphoneLabel.Text = string.Empty;
+            NameLabel.Text = string.Empty;
+            SurnameLabel.Text = string.Empty;
+            DateOfBirthLabel.Text = string.Empty;
+            IDNumberLabel.Text = string.Empty;
+            //RoleLabel.Text = string.Empty;
+            //FrontIdImagePathLabel.Text = string.Empty;
+            //BackIdImagePathLabel.Text = string.Empty;
+        }
+
     }
 }

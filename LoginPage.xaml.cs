@@ -26,31 +26,31 @@ namespace MauiAppNSRI
         /// </summary>
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            // Validate that both username and password fields are populated
             if (string.IsNullOrWhiteSpace(UsernameEntry.Text) || string.IsNullOrWhiteSpace(PasswordEntry.Text))
             {
                 await DisplayAlert("Error", "Please enter both Username and Password.", "OK");
                 return;
             }
 
-            // Establish a connection to the SQLite database and create the user table if not existing
             using var db = new SQLiteConnection(dbPath);
             db.CreateTable<UserModel>();
 
-            // Query for a user matching the entered username and password
             var user = db.Table<UserModel>().FirstOrDefault(u => u.Username == UsernameEntry.Text && u.Password == PasswordEntry.Text);
 
             if (user != null)
             {
+                // Store the logged-in user's information
                 Preferences.Set("LoggedInUsername", user.Username);
-                var storedUsername = Preferences.Get("LoggedInUsername", string.Empty);
-                await DisplayAlert("Success", $"Logged in as {storedUsername}", "OK");
-                await Shell.Current.GoToAsync("//MainPage");
+                Preferences.Set("UserRole", user.Role);  // Store role for access control
+                await DisplayAlert("Success", $"Welcome, {user.Username}!", "OK");
+                await Shell.Current.GoToAsync("//MainPage");// Navigate to the main page
+                UsernameEntry.Text = string.Empty; // Clear the username field
+                PasswordEntry.Text = string.Empty;  // Clear the password field
             }
             else
             {
-                // Display error message if authentication fails
                 await DisplayAlert("Authentication Failed", "Invalid username or password.", "OK");
+                PasswordEntry.Text = string.Empty; // Clear the password field on failed login
             }
         }
 
